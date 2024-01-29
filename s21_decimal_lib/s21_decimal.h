@@ -1,6 +1,7 @@
 #ifndef MEGA_HOROSH_DECIMAL_S21_DECIMAL_H
 #define MEGA_HOROSH_DECIMAL_S21_DECIMAL_H
 
-int sum(int a, int b);
+#include "stdio.h"
+#include "stdlib.h"
 
 #endif //MEGA_HOROSH_DECIMAL_S21_DECIMAL_H

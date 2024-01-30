@@ -28,6 +28,7 @@ s21_decimal
 *.so
 *.so.*
 *.dylib
+.vscode/
 
 # Executables
 *.exe

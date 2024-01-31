@@ -13,11 +13,11 @@
 // Suite *suite_memchr(void);
 Suite *sample(void);
 Suite *suite_is_equal(void);
-Suite *is_greater_or_equal(void);
-Suite *is_greater(void);
-Suite *is_less_or_equal(void);
-Suite *is_less(void);
-Suite *is_not_equal(void);
+Suite *suite_is_greater_or_equal(void);
+Suite *suite_is_greater(void);
+Suite *suite_is_less_or_equal(void);
+Suite *suite_is_less(void);
+Suite *suite_is_not_equal(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase, int counter_testcase);

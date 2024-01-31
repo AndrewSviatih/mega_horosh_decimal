@@ -9,6 +9,10 @@ typedef struct {
 
 int sum(int a, int b);
 
+void removeTrailingZeros(s21_decimal* d);
+void setBinary(s21_decimal* d, unsigned long long num);
+int s21_get_bit(s21_decimal a, int index);
+int s21_get_scale(s21_decimal a);
 int s21_is_less(s21_decimal a, s21_decimal b);
 int s21_is_less_or_equal(s21_decimal a, s21_decimal b);
 int s21_is_greater(s21_decimal a, s21_decimal b);

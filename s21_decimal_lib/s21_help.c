@@ -18,6 +18,10 @@ void removeTrailingZeros(s21_decimal* d) {
   }
 }
 
+int s21_get_sign(s21_decimal d) {
+  return (d.bits[3] && (1u << 31));
+}
+
 int s21_get_bit(s21_decimal a, int index) {
   int num_int = index / 32;
   int num_bit = index % 32;
@@ -25,10 +29,5 @@ int s21_get_bit(s21_decimal a, int index) {
 }
 
 int s21_get_scale(s21_decimal a) {
-  int scale = 0;
-  for (int i = 96 + 23; i >= 96 + 16; --i) {
-    scale <<= 1;
-    scale |= s21_get_bit(a, i);
-  }
-  return scale;
+  return a.bits[3] >> 16;
 }

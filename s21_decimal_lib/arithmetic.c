@@ -19,6 +19,7 @@ work_decimal conversion(s21_decimal v_1) {
 
 s21_decimal reverseConversion(work_decimal num) {
   s21_decimal res;
+  res.bits[3] = 0x0;
   res.bits[3] &= MINUS;
   for (int i = 0; i < 3; i++) {
     res.bits[i] = num.bits[i] & MAX4BITE;
@@ -100,7 +101,7 @@ void incompleteSubtraction(work_decimal work_num_1, work_decimal work_num_2,
   }
 }
 
-bool addition(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
+bool s21_add(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
   bool error = false;
   if (equalToZero(num_1)) {
     *res = num_2;
@@ -127,7 +128,7 @@ bool addition(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
       }
     } else {
       // if (num_1 > num_2) num_1 - num_2 sign = sign_num_1
-      if (more(work_num_1, work_num_2)) {
+      if (s21_is_greater(work_num_1, work_num_2)) {
         sign = sign_num_1;
         incompleteSubtraction(work_num_1, work_num_2, &work_res);
       } else {
@@ -155,10 +156,10 @@ bool addition(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
   return error;
 }
 
-bool subtraction(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
+bool s21_sub(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
   bool error = false;
   num_2.bits[3] ^= MINUS;
-  if (addition(num_1, num_2, res)) {
+  if (s21_add(num_1, num_2, res)) {
     error = true;
   }
   return error;

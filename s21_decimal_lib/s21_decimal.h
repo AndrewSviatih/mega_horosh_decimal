@@ -1,5 +1,6 @@
 #ifndef S21_DECIMAL_H
 #define S21_DECIMAL_H
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -42,16 +43,21 @@ bool normalization(work_decimal* num);
 // Неполное вычитание
 void incompleteSubtraction(work_decimal work_num_1, work_decimal work_num_2,
                            work_decimal* work_res);
-// Сложение
-bool addition(s21_decimal num_1, s21_decimal num_2, s21_decimal* res);
+
+// Arithmetic Operators
+//  Сложение
+bool s21_add(s21_decimal num_1, s21_decimal num_2, s21_decimal* res);
 // Вычитание
-bool subtraction(s21_decimal num_1, s21_decimal num_2, s21_decimal* res);
+bool s21_sub(s21_decimal num_1, s21_decimal num_2, s21_decimal* res);
+//---
 
-bool equally(work_decimal num_1, work_decimal num_2);
-bool notEqual(work_decimal num_1, work_decimal num_2);
-bool more(work_decimal num_1, work_decimal num_2);
-bool less(work_decimal num_1, work_decimal num_2);
-bool moreOrEqual(work_decimal num_1, work_decimal num_2);
-bool lessOrEqual(work_decimal num_1, work_decimal num_2);
+// Comparison Operators
+bool s21_is_less(work_decimal num_1, work_decimal num_2);
+bool s21_is_less_or_equal(work_decimal num_1, work_decimal num_2);
+bool s21_is_greater(work_decimal num_1, work_decimal num_2);
+bool s21_is_greater_or_equal(work_decimal num_1, work_decimal num_2);
+bool s21_is_equal(work_decimal num_1, work_decimal num_2);
+bool s21_is_not_equal(work_decimal num_1, work_decimal num_2);
+//----
 
-#endif // MEGA_HOROSH_DECIMAL_S21_DECIMAL_H
+#endif  // MEGA_HOROSH_DECIMAL_S21_DECIMAL_H

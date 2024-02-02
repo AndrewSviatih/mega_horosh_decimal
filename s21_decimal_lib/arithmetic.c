@@ -88,7 +88,6 @@ void incompleteSubtraction(work_decimal work_num_1, work_decimal work_num_2,
   for (int i = 0; i < 7; i++) {
     if (work_num_1.bits[i] >= work_num_2.bits[i] &&
         !(work_num_1.bits[i] == work_num_2.bits[i] && perevod)) {
-      printf("for: i = %d\n", i);
       work_res->bits[i] = work_num_1.bits[i] - work_num_2.bits[i];
       if (perevod) work_res->bits[i] -= 0x1;
       perevod = 0x0;
@@ -128,7 +127,7 @@ bool addition(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
       }
     } else {
       // if (num_1 > num_2) num_1 - num_2 sign = sign_num_1
-      if (1) {
+      if (more(work_num_1, work_num_2)) {
         sign = sign_num_1;
         incompleteSubtraction(work_num_1, work_num_2, &work_res);
       } else {

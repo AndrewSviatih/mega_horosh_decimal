@@ -27,11 +27,15 @@ void s21_set_scale(s21_decimal *dst, int scale) {
 }
 
 void s21_set_bit(s21_decimal *dst, int index, int bit) {
-  int mask = 1u << (index % 32);
+  int mask = BIT_MASK(index);
   if (bit == 0)
     dst->bits[index / 32] = dst->bits[index / 32] & ~mask;
   else
     dst->bits[index / 32] = dst->bits[index / 32] | mask;
+}
+
+void s21_zero_decimal(s21_decimal *dst) {
+  dst->bits[0] = dst->bits[1] = dst->bits[2] = dst->bits[3] = 0;
 }
 
 

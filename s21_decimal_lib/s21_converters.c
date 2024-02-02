@@ -15,16 +15,32 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   return 0;
 }
 
-void print_bits(int value) {
-  for (int i = 31; i >= 0; i--) {
-    int bit = (value >> i) & 1;
-    printf("%d", bit);
-    if (i % 4 == 0) { // Для лучшей читаемости можно добавить пробел после каждых 4 бит
-      printf(" ");
-    }
+int s21_from_int_to_decimal(int src, s21_decimal *dst) {
+  s21_zero_decimal(dst);
+  int error = 0;
+  if (src < 0) {
+    s21_set_sign(dst);
+    src *= -1;
   }
-  printf("\n");
+  if (src > INT_MAX)
+    error = 1;
+  else
+    dst->bits[0] = src;
+
+  return error;
 }
+
+
+//void print_bits(int value) {
+//  for (int i = 31; i >= 0; i--) {
+//    int bit = (value >> i) & 1;
+//    printf("%d", bit);
+//    if (i % 4 == 0) { // Для лучшей читаемости можно добавить пробел после каждых 4 бит
+//      printf(" ");
+//    }
+//  }
+//  printf("\n");
+//}
 
 
 //int main () {

@@ -53,3 +53,5 @@ bool more(work_decimal num_1, work_decimal num_2);
 bool less(work_decimal num_1, work_decimal num_2);
 bool moreOrEqual(work_decimal num_1, work_decimal num_2);
 bool lessOrEqual(work_decimal num_1, work_decimal num_2);
+
+#endif

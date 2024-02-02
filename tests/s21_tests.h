@@ -10,11 +10,10 @@
 
 #include "../s21_decimal_lib/s21_decimal.h"
 
-// Suite *suite_memchr(void);
-Suite *sample(void);
+Suite *suite_from_decimal_to_float(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase, int counter_testcase);
-double get_rand(double min, double max);
+float s21_rand_r(float a, float b);
 
 #endif  // SRC_TESTS_INCLUDES_S21_TESTS_H_

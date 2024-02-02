@@ -22,7 +22,7 @@ void run_tests(void) {
 
     int counter_testcase = 0;
 
-    Suite *list_cases[] = {sample(), NULL};
+    Suite *list_cases[] = {suite_from_decimal_to_float(), NULL};
 
     for (Suite **current_testcase = list_cases; *current_testcase != NULL;
         current_testcase++) {

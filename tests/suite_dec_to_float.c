@@ -403,110 +403,12 @@ START_TEST(s21_from_decimal_to_floatTest7) {
 }
 END_TEST
 
-// START_TEST(test_from_decimal_to_float_fail_manual1) {
-//     // 792281625.14264337593543950335
-//     s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x140000}};
-//     int code = s21_from_decimal_to_float(decimal, NULL);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-
-// START_TEST(test_from_decimal_to_float_fail_manual2) {
-//     // степень 154 (показатель степени должен быть от 0 до 28)
-//     // биты 0-15 не нули
-//     // биты 24-30 не нули
-//     s21_decimal decimal = {{0, 0, 0, 1000000000}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual3) {
-//     // степень 29 (показатель степени должен быть от 0 до 28)
-//     s21_decimal decimal = {{-1, 0, 0, 0x1D0000}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual4) {
-//     // степень 29 (показатель степени должен быть от 0 до 28)
-//     s21_decimal decimal = {{0, 0, 0, 0x1D0000}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual5) {
-//     // степень 28 (что корректно), но биты 0-15 не нули (младший бит)
-//     s21_decimal decimal = {{-1, 0, 0, 0x1C0001}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual6) {
-//     // степень 28 (что корректно), но биты 0-15 не нули (старший бит)
-//     s21_decimal decimal = {{-1, 0, 0, 0x1C8000}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual7) {
-//     // степень 28 (что корректно), но биты 24-30 не нули (младший бит)
-//     s21_decimal decimal = {{-1, 0, 0, 0x11C0000}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual8) {
-//     // степень 28 (что корректно), но биты 24-30 не нули (старший бит)
-//     s21_decimal decimal = {{-1, 0, 0, 0x401C0000}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
-// START_TEST(test_from_decimal_to_float_fail_manual9) {
-//     // Просто все единицы
-//     s21_decimal decimal = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF}};
-//     float result;
-//     int code = s21_from_decimal_to_float(decimal, &result);
-
-//     ck_assert_int_eq(code, TEST_CONVERSION_ERROR);
-// }
-// END_TEST
-
 
 Suite *suite_from_decimal_to_float(void) {
   Suite *s = suite_create("from_decimal_to_float");
   TCase *tc = tcase_create("from_decimal_to_float_tc");
 
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual1);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual2);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual3);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual4);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual5);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual6);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual7);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual8);
-    // tcase_add_test(tc, test_from_decimal_to_float_fail_manual9);
+
   tcase_add_test(tc, from_decimal_to_float_0);
   tcase_add_test(tc, from_decimal_to_float_1);
 //  tcase_add_test(tc, from_decimal_to_float_2);

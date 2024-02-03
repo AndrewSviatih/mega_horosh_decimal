@@ -10,6 +10,7 @@
 #define MINUS 0x80000000
 #define SCALE 0x00ff0000
 #define BIT_MASK(index) (1u << ((index) % 32))  // bit in index[0:95]
+#define GET_EXP(src) (((*(int *)&src & ~MINUS) >> 23) - 127)
 
 typedef struct {
   int bits[4];

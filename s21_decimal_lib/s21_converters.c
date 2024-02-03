@@ -41,7 +41,6 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
     else
       dst->bits[0] = src;
   }
-
   return error;
 }
 
@@ -94,71 +93,23 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     error = 1;
   } else {
     if (src != 0) {
-      int sign = signbit(src);
       int exp = GET_EXP(src);
-      if (exp > -94 && exp < 96) {
+      if (exp < -94 || exp > 96) {
         error = 1;
       } else {
-        double temp = (double)fabs(src);
+        double temp = (double) fabs(src);
         int i = 0;
-        for (; i < 28 && (int)temp / (int)pow(2, 21) == 0; i++) {
-          temp *= 10;
-        }
-        printf("%lf\n", temp);
-        temp = round(temp);
+        temp = s21_normalize_28_signs(temp, &i);
         if (i <= 28) {
-          
+          temp = round(temp);
+          long long intPart = (long long)temp;
+          dst->bits[0] = intPart & 0xFFFFFFFF;
+          dst->bits[1] = (intPart >> 32) & 0xFFFFFFFF;
+          dst->bits[3] |= i << 16;
+          if (signbit(src)) s21_set_sign(dst);
         }
       }
-
-
     }
-    
   }
-
-
   return error;
 }
-
-void print_bits(int value) {
- for (int i = 31; i >= 0; i--) {
-   int bit = (value >> i) & 1;
-   printf("%d", bit);
-   if (i % 4 == 0) { // Для лучшей читаемости можно добавить пробел после каждых 4 бит
-     printf(" ");
-   }
- }
- printf("\n");
-}
-
-
-int main () {
- s21_decimal val = {{0, 0, 0, 0}};
- float res = 1234.56789;
- s21_from_float_to_decimal(res, &val);
-
- printf("%f\n", res);
-
- for (int i = 0; i < 4; i++) {
-   printf("bits[%d]: ", i);
-
-   print_bits(val.bits[i]);
- }
-}
-
-//int main(void) {
-//  s21_decimal num;
-//  num.bits[0] = 0x0;
-//  num.bits[1] = 0x10;
-//  num.bits[2] = 0x40000;
-//  num.bits[3] = MINUS;
-//  for (int i = 0; i < 128; i++) {
-//    printf("%d = ", i);
-//    if (s21_get_bit(num, i)) {
-//      printf("%d\n", 1);
-//    } else {
-//      printf("%d\n", 0);
-//    }
-//  }
-//  return 0;
-//}

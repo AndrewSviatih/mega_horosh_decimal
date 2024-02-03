@@ -28,11 +28,13 @@ int s21_get_bit(s21_decimal dst, int index);
 int s21_get_scale(s21_decimal dst);
 int s21_get_sign(s21_decimal dst);
 
+void s21_set_bit(s21_decimal *dst, int index, int bit);
 void s21_set_scale(s21_decimal *dst, int scale);
 void s21_set_sign(s21_decimal *dst);
-void s21_set_bit(s21_decimal *dst, int index, int bit);
 
 void s21_zero_decimal(s21_decimal *dst);
+
+double s21_normalize_28_signs(double temp, int *i);
 /*
 --------------------------------------------------------------
 converters
@@ -42,4 +44,10 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst);
 int s21_from_decimal_to_double(s21_decimal src, long double *dst);
 int s21_from_int_to_decimal(int src, s21_decimal *dst);
 int s21_from_decimal_to_int(s21_decimal src, int *dst);
+int s21_from_float_to_decimal(float src, s21_decimal *dst);
+/*
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+*/
 

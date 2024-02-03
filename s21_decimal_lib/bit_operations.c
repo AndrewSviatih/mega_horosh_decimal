@@ -38,5 +38,9 @@ void s21_zero_decimal(s21_decimal *dst) {
   dst->bits[0] = dst->bits[1] = dst->bits[2] = dst->bits[3] = 0;
 }
 
-
-
+double s21_normalize_28_signs(double temp, int *i) {
+  for (; *i < 28 && (int) temp / (int) pow(2, 21) == 0; *i = *i + 1) {
+    temp *= 10;
+  }
+  return temp;
+}

@@ -11,6 +11,8 @@
 #include "../s21_decimal_lib/s21_decimal.h"
 
 Suite *suite_from_decimal_to_float(void);
+Suite *suite_from_decimal_to_int(void);
+Suite *suite_from_int_to_decimal(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase, int counter_testcase);

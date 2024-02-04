@@ -2,19 +2,34 @@
 
 START_TEST(is_equal_test1) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xFFFFFFFF;
+  decimal1.bits[1] = 0xFFFFFFFF;
+  decimal1.bits[2] = 0xFFFFFFFF;
+  decimal1.bits[3] = 0x0;
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xFFFFFFFF;
+  decimal2.bits[1] = 0xFFFFFFFF;
+  decimal2.bits[2] = 0xFFFFFFFF;
+  decimal2.bits[3] = 0x0;
   int check = 1;
-
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
 }
 
 START_TEST(is_equal_test2) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xFFFFFFFF;
+  decimal1.bits[1] = 0xFFFFFFFF;
+  decimal1.bits[2] = 0xFFFFFFFF;
+  decimal1.bits[3] = 0x0;
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xFFFFFFFF;
+  decimal2.bits[1] = 0xFFFFFFFF;
+  decimal2.bits[2] = 0xFFFFFFFF;
+  decimal2.bits[3] = 0x0;
   int check = 1;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
@@ -22,9 +37,17 @@ START_TEST(is_equal_test2) {
 
 START_TEST(is_equal_test3) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xFFFFFFFF;
+  decimal1.bits[1] = 0xFFFFFFFF;
+  decimal1.bits[2] = 0xFFFFFFFF;
+  decimal1.bits[3] = 0x0;
   // -79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xFFFFFFFF;
+  decimal2.bits[1] = 0xFFFFFFFF;
+  decimal2.bits[2] = 0xFFFFFFFF;
+  decimal2.bits[3] = 0x80000000;
   int check = 0;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
@@ -32,9 +55,17 @@ START_TEST(is_equal_test3) {
 
 START_TEST(is_equal_test4) {
   // -79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x80000000}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xFFFFFFFF;
+  decimal1.bits[1] = 0xFFFFFFFF;
+  decimal1.bits[2] = 0xFFFFFFFF;
+  decimal1.bits[3] = 0x80000000;
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xFFFFFFFF;
+  decimal2.bits[1] = 0xFFFFFFFF;
+  decimal2.bits[2] = 0xFFFFFFFF;
+  decimal2.bits[3] = 0x0;
   int check = 0;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
@@ -42,9 +73,17 @@ START_TEST(is_equal_test4) {
 
 START_TEST(is_equal_test5) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xFFFFFFFF;
+  decimal1.bits[1] = 0xFFFFFFFF;
+  decimal1.bits[2] = 0xFFFFFFFF;
+  decimal1.bits[3] = 0x0;
   // 52818775009509558395695966890
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xAAAAAAAA;
+  decimal2.bits[1] = 0xAAAAAAAA;
+  decimal2.bits[2] = 0xAAAAAAAA;
+  decimal2.bits[3] = 0x0;
   int check = 0;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
@@ -52,9 +91,17 @@ START_TEST(is_equal_test5) {
 
 START_TEST(is_equal_test6) {
   // 52818775009509558395695966890
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x0}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xAAAAAAAA;
+  decimal1.bits[1] = 0xAAAAAAAA;
+  decimal1.bits[2] = 0xAAAAAAAA;
+  decimal1.bits[3] = 0x0;
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xFFFFFFFF;
+  decimal2.bits[1] = 0xFFFFFFFF;
+  decimal2.bits[2] = 0xFFFFFFFF;
+  decimal2.bits[3] = 0x0;
   int check = 0;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
@@ -62,9 +109,17 @@ START_TEST(is_equal_test6) {
 
 START_TEST(is_equal_test7) {
   // 79228162514264337593543950335
-  s21_decimal decimal1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xFFFFFFFF;
+  decimal1.bits[1] = 0xFFFFFFFF;
+  decimal1.bits[2] = 0xFFFFFFFF;
+  decimal1.bits[3] = 0x0;
   // -52818775009509558395695966890
-  s21_decimal decimal2 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xAAAAAAAA;
+  decimal2.bits[1] = 0xAAAAAAAA;
+  decimal2.bits[2] = 0xAAAAAAAA;
+  decimal2.bits[3] = 0x80000000;
   int check = 0;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);
@@ -72,9 +127,17 @@ START_TEST(is_equal_test7) {
 
 START_TEST(is_equal_test8) {
   // -52818775009509558395695966890
-  s21_decimal decimal1 = {{0xAAAAAAAA, 0xAAAAAAAA, 0xAAAAAAAA, 0x80000000}};
+  s21_decimal decimal1;
+  decimal1.bits[0] = 0xAAAAAAAA;
+  decimal1.bits[1] = 0xAAAAAAAA;
+  decimal1.bits[2] = 0xAAAAAAAA;
+  decimal1.bits[3] = 0x80000000;
   // 79228162514264337593543950335
-  s21_decimal decimal2 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0}};
+  s21_decimal decimal2;
+  decimal2.bits[0] = 0xFFFFFFFF;
+  decimal2.bits[1] = 0xFFFFFFFF;
+  decimal2.bits[2] = 0xFFFFFFFF;
+  decimal2.bits[3] = 0x0;
   int check = 0;
 
   ck_assert_int_eq(s21_is_equal(decimal1, decimal2), check);

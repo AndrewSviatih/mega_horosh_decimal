@@ -59,7 +59,7 @@ void pointleft(work_decimal* num) {
 
 uint64_t pointright(work_decimal* num) {
   uint64_t remainder = 0;
-  for (int i = 7; i >= 0; i--) {
+  for (int i = 6; i >= 0; i--) {
     num->bits[i] += remainder << 32;
     remainder = num->bits[i] % 10;
     num->bits[i] /= 10;
@@ -128,7 +128,7 @@ bool s21_add(s21_decimal num_1, s21_decimal num_2, s21_decimal* res) {
       }
     } else {
       // if (num_1 > num_2) num_1 - num_2 sign = sign_num_1
-      if (s21_is_greater(work_num_1, work_num_2)) {
+      if (s21_is_work_greater(work_num_1, work_num_2)) {
         sign = sign_num_1;
         incompleteSubtraction(work_num_1, work_num_2, &work_res);
       } else {

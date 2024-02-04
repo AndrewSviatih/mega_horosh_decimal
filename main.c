@@ -17,9 +17,10 @@ void run_testcase(Suite *testcase, int counter_testcase) {
 }
 
 void run_tests(void) {
-  int counter_testcase = 0;
+  int counter_testcase = 1;
 
-  Suite *list_cases[] = {suite_is_equal(), NULL};
+  Suite *list_cases[] = {suite_is_less(), suite_is_less_or_equal(),
+                         suite_is_equal(), suite_is_not_equal(), NULL};
 
   for (Suite **current_testcase = list_cases; *current_testcase != NULL;
        current_testcase++) {

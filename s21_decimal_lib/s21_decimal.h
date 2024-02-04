@@ -51,13 +51,19 @@ bool s21_add(s21_decimal num_1, s21_decimal num_2, s21_decimal* res);
 bool s21_sub(s21_decimal num_1, s21_decimal num_2, s21_decimal* res);
 //---
 
-// Comparison Operators
-bool s21_is_less(work_decimal num_1, work_decimal num_2);
-bool s21_is_less_or_equal(work_decimal num_1, work_decimal num_2);
-bool s21_is_greater(work_decimal num_1, work_decimal num_2);
-bool s21_is_greater_or_equal(work_decimal num_1, work_decimal num_2);
-bool s21_is_equal(work_decimal num_1, work_decimal num_2);
-bool s21_is_not_equal(work_decimal num_1, work_decimal num_2);
-//----
+//* Comparison Operators
+int s21_is_less(s21_decimal value_1, s21_decimal value_2);
+int s21_is_less_or_equal(s21_decimal value_1, s21_decimal value_2);
+int s21_is_greater(s21_decimal value_1, s21_decimal value_2);
+int s21_is_greater_or_equal(s21_decimal value_1, s21_decimal value_2);
+int s21_is_equal(s21_decimal value_1, s21_decimal value_2);
+int s21_is_not_equal(s21_decimal value_1, s21_decimal value_2);
+//* Work
+bool s21_is_work_less(work_decimal num_1, work_decimal num_2);
+bool s21_is_work_less_or_equal(work_decimal num_1, work_decimal num_2);
+bool s21_is_work_greater(work_decimal num_1, work_decimal num_2);
+bool s21_is_work_greater_or_equal(work_decimal num_1, work_decimal num_2);
+bool s21_is_work_equal(work_decimal num_1, work_decimal num_2);
+//*----
 
 #endif  // MEGA_HOROSH_DECIMAL_S21_DECIMAL_H

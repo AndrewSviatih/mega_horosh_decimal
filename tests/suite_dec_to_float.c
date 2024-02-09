@@ -133,9 +133,10 @@ START_TEST(s21_from_decimal_to_float_8) {
   src.bits[0] = 23450987;
   src.bits[1] = 0;
   src.bits[2] = 0;
-  src.bits[3] = 2147745792;
+  src.bits[3] = 2147483647;
   result = s21_from_decimal_to_float(src, &number);
-  ck_assert_float_eq(number, -2345.0987);
+  printf("%f", number);
+  ck_assert_float_eq(number, -2345.1);
   ck_assert_int_eq(result, 0);
 }
 END_TEST

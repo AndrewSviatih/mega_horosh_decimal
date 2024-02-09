@@ -2,7 +2,7 @@
 
 int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   int error = 0;
-  double temp = *dst;
+  double temp = 0.0;
 
   if (!dst) {
     error = 1;

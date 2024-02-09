@@ -7,7 +7,7 @@ int s21_get_bit(s21_decimal dst, int index) {
 }  // sample: bit index = 40. 40 / 32 = 1. mask = bit from curr index.
 
 int s21_get_scale(s21_decimal dst) {
-  int scale = (SCALE & dst.bits[3]) >> 16;
+  int scale = (SC & dst.bits[3]) >> 16;
   return scale;
 }
 

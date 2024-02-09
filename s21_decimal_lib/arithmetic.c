@@ -1,8 +1,3 @@
-#include <inttypes.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
-
 #include "s21_decimal.h"
 
 work_decimal conversion(s21_decimal v_1) {

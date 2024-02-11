@@ -30,18 +30,14 @@ uint32_t readSignScale() {
   scanf("%d ", &scale);
   scanf("%d", &sign);
   if (scale > 28) scale = 0;
-  if (sign > 1 || sign < 0) sign = 0;
+  if (sign > 1) sign = 0;
   res = ((sign << 15) + scale) << 16;
 
   return res;
 }
 
 int main(void) {
-  uint64_t a = 0;
-  s21_decimal num_1, num_2, res;
-  for (int i = 0; i < 4; i++) {
-    res.bits[i] = 0x0;
-  }
+  s21_decimal num_1, num_2;
   num_1.bits[1] = readHexInput();
   num_1.bits[0] = readHexInput();
   num_1.bits[2] = 0x00000000;
@@ -158,14 +154,41 @@ void printdivost(s21_decimal num_1, s21_decimal num_2) {
   printf("\n");
 }
 
+void funcPoPricoluGCC(uint64_t gg) {
+  if (gg < 0x10000000) {
+    printf("0");
+    if (gg < 0x1000000) {
+      printf("0");
+      if (gg < 0x100000) {
+        printf("0");
+        if (gg < 0x10000) {
+          printf("0");
+          if (gg < 0x1000) {
+            printf("0");
+            if (gg < 0x100) {
+              printf("0");
+              if (gg < 0x10) {
+                printf("0");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 void printConsole(s21_decimal num) {
   if (num.bits[3] & MINUS) {
-    printf("-");
+    printf("1\n");
+  } else {
+    printf("0\n");
   }
   uint64_t gg;
   for (int i = 2; i >= 0; i--) {
     gg = num.bits[i] & MAX4BITE;
-    printf("%0.8lx", gg);
+    funcPoPricoluGCC(gg);
+    printf("%lx", gg);
   }
   printf("\n");
   int scale = ((num.bits[3] & SC) >> 16);
@@ -176,7 +199,7 @@ void printConsoleWork(work_decimal num) {
   uint64_t gg;
   for (int i = 6; i >= 0; i--) {
     gg = num.bits[i] & MAX4BITE;
-    printf("%0.8lx", gg);
+    printf("%lx", gg);
   }
   printf("\n");
 }

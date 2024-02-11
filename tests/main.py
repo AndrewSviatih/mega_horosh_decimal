@@ -12,13 +12,9 @@ def preobrazovanie(num, scale, sign):
 
 
 num_1 = int(input(), 16)
-print(num_1)
 scale_1 = int(input())
-print(scale_1)
 sign_1 = int(input())
-print(sign_1)
 num_1 = preobrazovanie(num_1, scale_1, sign_1)
-print(num_1)
 
 num_2 = int(input(), 16)
 scale_2 = int(input())
@@ -28,10 +24,10 @@ num_2 = preobrazovanie(num_2, scale_2, sign_2)
 operacion = input()
 
 if operacion == "+":
-    print(num_1 + num_2)
+    print(round(num_1 + num_2, 10))
 elif operacion == "-":
-    print(num_1 - num_2)
+    print(round(num_1 - num_2, 10))
 elif operacion == "/":
-    print(num_1 / num_2)
+    print(round(num_1 / num_2, 10))
 elif operacion == "*":
-    print(num_1 * num_2)
+    print(round(num_1 * num_2, 10))

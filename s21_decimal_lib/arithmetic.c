@@ -132,7 +132,7 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
       }
     } else {
       // if (num_1 > num_2) num_1 - num_2 sign = sign_num_1
-      if (more(work_num_1, work_num_2)) {
+      if (s21_is_work_greater(work_num_1, work_num_2)) {
         sign = sign_num_1;
         incompletes21_sub(work_num_1, work_num_2, &work_res);
       } else {
@@ -212,21 +212,22 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
 
     // result->bits[3] |= (work_result.scale << 16) & SC;
 
-    getoverflow(&work_result);
+    //getoverflow(&work_result);
 
-    if (normalization(&work_result) || s21_checkScale(&work_result)) {
-      if (result->bits[3] & MINUS) {
+    if (getoverflow3(&work_result) || normalization(&work_result) || s21_checkScale(&work_result)) {
+      for (int i = 0; i < 4; i++) result->bits[i] = 0x0;
+      if (sign_value_1 != sign_value_2) {
         error = 2;
       } else {
         error = 1;
       }
-    }
-
-    *result = reverseConversion(work_result);
-    if (sign_value_1 == sign_value_2) {
-      result->bits[3] &= ~MINUS;
     } else {
-      result->bits[3] |= MINUS;
+      *result = reverseConversion(work_result);
+      if (sign_value_1 == sign_value_2) {
+        result->bits[3] &= ~MINUS;
+      } else {
+        result->bits[3] |= MINUS;
+      }
     }
   }
 
@@ -238,12 +239,12 @@ bool mulBy10(work_decimal* work_temp, work_decimal work_value,
              work_decimal* work_iter) {
   bool error = false, gg = false;
   work_decimal work_temp_2 = *work_temp;
-  work_decimal work_num_10;
+  // work_decimal work_num_10;
 
   pointleft(&work_temp_2);
   work_temp_2.scale = 0;
 
-  while (moreOrEqual(work_value, work_temp_2)) {
+  while (s21_is_work_greater_or_equal(work_value, work_temp_2)) {
     pointleft(work_iter);
     work_iter->scale = 0x0;
     *work_temp = work_temp_2;
@@ -312,7 +313,9 @@ work_decimal divisionWithRemainder(work_decimal work_value_1,
                                    work_decimal* work_result) {
   work_value_1.scale = 0x0;
   work_value_2.scale = 0x0;
-  work_decimal work_iter, work_remainder = work_value_1, work_check;
+  work_decimal work_iter;
+  // work_remainder = work_value_1;
+  // work_decimal work_check;
   setToZero(&work_iter);
   setToZero(work_result);
 
@@ -320,7 +323,7 @@ work_decimal divisionWithRemainder(work_decimal work_value_1,
 
   // цикл деления
   bool stop = true;
-  while (moreOrEqual(work_value_1, work_value_2)) {
+  while (s21_is_work_greater_or_equal(work_value_1, work_value_2)) {
     work_decimal work_temp = work_value_2;
     bool gg = true;
 
@@ -398,29 +401,46 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
         iter++;
       }
     }
+    if (iter == -1) iter = 0;
 
     if (iter < 0) {
       error = 2;
+      for (int i = 0; i < 4; i++) result->bits[i] = 0x0;
     } else {
       work_result.scale = iter + 0x0;
     }
     if (!error &&
         (normalization(&work_result) || s21_checkScale(&work_result))) {
-      if (result->bits[3] & MINUS) {
+      if (sign_value_1 != sign_value_2) {
         error = 2;
       } else {
         error = 1;
       }
+      for (int i = 0; i < 4; i++) result->bits[i] = 0x0;  
     }
+    if (!error) {
+      *result = reverseConversion(work_result);
 
-    *result = reverseConversion(work_result);
-
-    if (sign_value_1 == sign_value_2) {
-      result->bits[3] &= ~MINUS;
-    } else {
-      result->bits[3] |= MINUS;
+      if (sign_value_1 == sign_value_2) {
+        result->bits[3] &= ~MINUS;
+      } else {
+        result->bits[3] |= MINUS;
+      }
     }
   }
 
   return error;
 }
+
+// int main () {
+//   s21_decimal value_1 = {{35, 0, 0, 0}};
+//   s21_decimal value_2 = {{5, 0, 0, 0}};
+//   s21_decimal result = {{0, 0, 0, 0}};
+//   s21_decimal check = {{7, 0, 0, 0}};
+//   //s21_set_scale(&value_1, 1);
+//   //s21_set_scale(&value_2, 2);
+//   int return_value = s21_div(value_1, value_2, &result);
+//   s21_is_equal(result, check);
+//   printf("%d\n", return_value);
+//   for (int i = 0; i < 4; i++) printf("%d ", result.bits[i]);
+// }

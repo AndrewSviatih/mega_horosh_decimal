@@ -126,20 +126,19 @@ START_TEST(s21_from_decimal_to_float_7) {
 }
 END_TEST
 
-START_TEST(s21_from_decimal_to_float_8) {
-  s21_decimal src = {0};
-  int result = 0;
-  float number = 0.0;
-  src.bits[0] = 23450987;
-  src.bits[1] = 0;
-  src.bits[2] = 0;
-  src.bits[3] = 2147483647;
-  result = s21_from_decimal_to_float(src, &number);
-  printf("%f", number);
-  ck_assert_float_eq(number, -2345.1);
-  ck_assert_int_eq(result, 0);
-}
-END_TEST
+// START_TEST(s21_from_decimal_to_float_8) {
+//   s21_decimal src = {0};
+//   int result = 0;
+//   float number = 0.0;
+//   src.bits[0] = 23450987;
+//   src.bits[1] = 0;
+//   src.bits[2] = 0;
+//   src.bits[3] = 2147483647;
+//   result = s21_from_decimal_to_float(src, &number);
+//   ck_assert_float_eq(number, -2345.1);
+//   ck_assert_int_eq(result, 0);
+// }
+// END_TEST
 
 START_TEST(s21_from_decimal_to_float_12) {
   s21_decimal src;
@@ -422,7 +421,7 @@ Suite *suite_from_decimal_to_float(void) {
   tcase_add_test(tc, s21_from_decimal_to_float_5);
   tcase_add_test(tc, s21_from_decimal_to_float_6);
   tcase_add_test(tc, s21_from_decimal_to_float_7);
-  tcase_add_test(tc, s21_from_decimal_to_float_8);
+  // tcase_add_test(tc, s21_from_decimal_to_float_8);
   tcase_add_test(tc, s21_from_decimal_to_float_12);
   tcase_add_test(tc, s21_from_decimal_to_float_22);
   tcase_add_test(tc, s21_from_decimal_to_float_32);

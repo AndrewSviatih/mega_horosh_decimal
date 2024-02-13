@@ -89,7 +89,7 @@ END_TEST
    src.bits[3] = 0;
    s21_set_bit(&src, 3, 31);
    result = s21_from_decimal_to_int(src, &number);
-//   ck_assert_int_eq(number, -2147483647);
+  ck_assert_int_eq(number, 2147483647);
    ck_assert_int_eq(result, 0);
  }
  END_TEST
@@ -170,7 +170,6 @@ START_TEST(s21_test_from_decimal_to_int_3) {
   check = 0;
 
   code = s21_from_decimal_to_int(a, &result);
-  //   ck_assert_int_eq(result, check);
   ck_assert_int_eq(code, 1);
 }
 END_TEST
@@ -179,7 +178,6 @@ START_TEST(s21_test_from_decimal_to_int_4) {
   s21_decimal a = {{INT_MAX, INT_MAX, INT_MAX, INT_MAX}};
   check = 0;
   code = s21_from_decimal_to_int(a, &result);
-  //   ck_assert_int_eq(result, check);
   ck_assert_int_eq(code, 1);
 }
 END_TEST

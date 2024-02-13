@@ -142,7 +142,9 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
       }
       getoverflow(&work_res);
     }
-    if (!normalization(&work_res)) {
+    if (s21_checkScale(&work_res)) {
+      error = 2;
+    } else if (!normalization(&work_res)) {
       // конвертируем в исходный decimal
       *result = reverseConversion(work_res);
       if (sign) {
@@ -151,7 +153,7 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
         result->bits[3] &= ~MINUS;
       }
     } else {
-      if (sign) {
+      if (!sign) {
         error = 1;
       } else {
         error = 2;
@@ -212,9 +214,10 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
 
     // result->bits[3] |= (work_result.scale << 16) & SC;
 
-    //getoverflow(&work_result);
+    // getoverflow(&work_result);
 
-    if (getoverflow3(&work_result) || normalization(&work_result) || s21_checkScale(&work_result)) {
+    if (getoverflow3(&work_result) || normalization(&work_result) ||
+        s21_checkScale(&work_result)) {
       for (int i = 0; i < 4; i++) result->bits[i] = 0x0;
       if (sign_value_1 != sign_value_2) {
         error = 2;
@@ -416,7 +419,7 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
       } else {
         error = 1;
       }
-      for (int i = 0; i < 4; i++) result->bits[i] = 0x0;  
+      for (int i = 0; i < 4; i++) result->bits[i] = 0x0;
     }
     if (!error) {
       *result = reverseConversion(work_result);
@@ -431,16 +434,3 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
 
   return error;
 }
-
-// int main () {
-//   s21_decimal value_1 = {{35, 0, 0, 0}};
-//   s21_decimal value_2 = {{5, 0, 0, 0}};
-//   s21_decimal result = {{0, 0, 0, 0}};
-//   s21_decimal check = {{7, 0, 0, 0}};
-//   //s21_set_scale(&value_1, 1);
-//   //s21_set_scale(&value_2, 2);
-//   int return_value = s21_div(value_1, value_2, &result);
-//   s21_is_equal(result, check);
-//   printf("%d\n", return_value);
-//   for (int i = 0; i < 4; i++) printf("%d ", result.bits[i]);
-// }

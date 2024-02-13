@@ -727,10 +727,11 @@ START_TEST(s21_subTest15) {
   s21_decimal result = {{0, 0, 0, 0}};
   s21_sub(src1, src2, &result);
 
-  origin.bits[0] = 0b11000000100010111000101000100010;
-  origin.bits[1] = 0b11111111111111111111111111111101;
-  origin.bits[2] = 0b00000000000000000000000000001001;
-  origin.bits[3] = 0b00000000000000010000000000000000;
+  origin.bits[0] = 0xc6745a9d;
+  origin.bits[1] = 0xffffffff;
+  origin.bits[2] = 0x0;
+  origin.bits[3] = 0x0;
+
   ck_assert_int_eq(origin.bits[3], result.bits[3]);
   ck_assert_int_eq(origin.bits[2], result.bits[2]);
   ck_assert_int_eq(origin.bits[1], result.bits[1]);

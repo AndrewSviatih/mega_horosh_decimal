@@ -48,29 +48,9 @@ int s21_negate(s21_decimal value, s21_decimal *result) {
   return error;
 }
 
-int s21_get_bit(s21_decimal number, int index) {
-  int num_index = S21_DEC_INDEX(index);
-  int num_bit = S21_DEC_BIT_FOR_INDEX(index);
-  //   int mask = number.bits[num_index] & (1u << num_bit);
-  //   return mask >> num_bit;
-  return (number.bits[num_index] & (1u << num_bit)) >> num_bit;
-}
-
-void s21_set_bit(s21_decimal *number, int index, int bit) {
-  int num_index = S21_DEC_INDEX(index);
-  int num_bit = S21_DEC_BIT_FOR_INDEX(index);
-  if (bit == BIT_ONE) {
-    number->bits[num_index] |= (1u << num_bit);
-  } else {
-    number->bits[num_index] &= (~((1u) << num_bit));
-  }
-}
-
 void s21_set_sign(s21_decimal *number, int sign) {
   s21_set_bit(number, SIGN_INDEX, sign);
 }
-
-int s21_get_sign(s21_decimal number) { return s21_get_bit(number, SIGN_INDEX); }
 
 int s21_copy(s21_decimal *to, s21_decimal from) {
   int error = OK;
@@ -92,22 +72,6 @@ int s21_set_zeroes(s21_decimal *number) {
     for (int i = 0; i < S21_DEC_BIT_LEN; i++) number->bits[i] = 0;
   }
   return error;
-}
-
-int s21_get_scale(s21_decimal number) {
-  int res = 0;
-  for (int i = 119; i >= 112; i--) {
-    res <<= 1;
-    res |= s21_get_bit(number, i);
-  }
-  return res;
-}
-
-void s21_set_scale(s21_decimal *number, int scale) {
-  for (int i = 112; i < 119; i++) {
-    s21_set_bit(number, i, scale & 1);
-    scale >>= 1;
-  }
 }
 
 s21_decimal *s21_decrease_scale(s21_decimal *number, int by) {

@@ -1,38 +1,32 @@
 #ifndef S21_DECIMAL_H
 #define S21_DECIMAL_H
 
+#include <inttypes.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "limits.h"
 #include "math.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "limits.h"
-#include <stdbool.h>
-#include <stdint.h>
-#include <inttypes.h>
 
 #define MINUS 0x80000000     // 10000000 00000000 00000000 00000000
 #define SC 0x00ff0000        // 00000000 11111111 00000000 00000000
 #define MAX4BITE 0xffffffff  // 11111111 11111111 11111111 11111111
 #define BIT_MASK(index) (1u << ((index) % 32))  // bit in index[0:95]
-#define GET_EXP(src) (((*(int *)&src & ~MINUS) >> 23) - 127)
+#define GET_EXP(src) (((*(int *)&src & ~MINUS) >> 23) - SIGN_INDEX)
 
 #define BIT_ONE 1
 #define BIT_NONE 0
 
 #define S21_DEC_BIT_LEN 4
 #define SIGN_INDEX 127
-#define S21_DEC_INDEX(index) (index / 32)
-#define S21_DEC_BIT_FOR_INDEX(index) (index % 32)
 
 #define ANY_ERROR 1
 #define OK 0
 
-// ============================================
-// bit manipulations
-int s21_get_bit(s21_decimal number, int index);
-void s21_set_bit(s21_decimal *number, int index, int bit);
 // sign operations
-int s21_get_sign(s21_decimal number);
 void s21_set_sign(s21_decimal *number, int sign);
 
 int s21_copy(s21_decimal *to, s21_decimal from);
@@ -40,8 +34,6 @@ int s21_copy(s21_decimal *to, s21_decimal from);
 int s21_set_zeroes(s21_decimal *number);
 
 // scale operations with decimal
-int s21_get_scale(s21_decimal number);
-void s21_set_scale(s21_decimal *number, int scale);
 s21_decimal *s21_decrease_scale(s21_decimal *number, int by);
 // ============================================
 
@@ -72,7 +64,7 @@ int s21_get_sign(s21_decimal dst);
 
 void s21_set_bit(s21_decimal *dst, int index, int bit);
 void s21_set_scale(s21_decimal *dst, int scale);
-void s21_set_sign(s21_decimal *dst);
+void s21_swap_sign(s21_decimal *dst);
 
 void s21_zero_decimal(s21_decimal *dst);
 
@@ -110,13 +102,13 @@ arithmetic
 --------------------------------------------------------------
 */ // arithmetic main
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
-int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal* result);
-int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal* result);
+int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
+int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 // mod
 work_decimal divisionWithRemainder(work_decimal work_value_1,
                                    work_decimal work_value_2,
-                                   work_decimal* work_result);
+                                   work_decimal *work_result);
 
 // arithmetic helper
 // convert decimal to big decimal
@@ -126,40 +118,40 @@ s21_decimal reverseConversion(work_decimal num);
 // check is 0 number
 bool equalToZero(s21_decimal num);
 // put 32 bits from small to higher
-bool getoverflow(work_decimal* num);
+bool getoverflow(work_decimal *num);
 // move ',' left
-void pointleft(work_decimal* num);
+void pointleft(work_decimal *num);
 // move ',' right
-uint64_t pointright(work_decimal* num);
+uint64_t pointright(work_decimal *num);
 // is number can be round
 bool isRoundPosebal(work_decimal num);
 // normalize decimal
-bool normalization(work_decimal* num);
+bool normalization(work_decimal *num);
 // Неполное вычитание ??????
 void incompleteSubtraction(work_decimal work_num_1, work_decimal work_num_2,
-                           work_decimal* work_res);
+                           work_decimal *work_res);
 // is scale correct
-bool s21_checkScale(work_decimal* value);
+bool s21_checkScale(work_decimal *value);
 
 // multiply 10 if we can
-bool mulBy10(work_decimal* work_temp, work_decimal work_value,
-             work_decimal* work_iter);
+bool mulBy10(work_decimal *work_temp, work_decimal work_value,
+             work_decimal *work_iter);
 // sum helper work_decimal
 int addWork(work_decimal work_num_1, work_decimal work_num_2,
-            work_decimal* work_res);
+            work_decimal *work_res);
 // sub helper work_decimal
 int subWork(work_decimal work_num_1, work_decimal work_num_2,
-            work_decimal* work_res);
+            work_decimal *work_res);
 // set all decimal to zero
-void setToZero(work_decimal* value);
+void setToZero(work_decimal *value);
 // add 1 ???????
-int add1Work(work_decimal* work_res);
+int add1Work(work_decimal *work_res);
 // is decimal is zero
 bool equalToZeroWork(work_decimal work_num);
 // getoverflow when loop befor 3
-bool getoverflow3(work_decimal* num);
+bool getoverflow3(work_decimal *num);
 // is correct div
-bool checkDiv(work_decimal work_result, bool* stop);
+bool checkDiv(work_decimal work_result, bool *stop);
 /**
 --------------------------------------------------------------
 additional funcs

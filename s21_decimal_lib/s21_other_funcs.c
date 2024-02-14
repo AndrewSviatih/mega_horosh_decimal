@@ -1,20 +1,4 @@
-//
-// Created by Sonse on 18.01.2024.
-//
-
-#include "decimal.h"
-
-#define BIT_ONE 1
-#define BIT_NONE 0
-#define S21_DEC_BIT_LEN 4
-
-#define SIGN_INDEX 127
-
-#define S21_DEC_INDEX(index) (index / 32)
-#define S21_DEC_BIT_FOR_INDEX(index) (index % 32)
-
-#define ANY_ERROR 1
-#define OK 0
+#include "s21_decimal.h"
 
 int s21_floor(s21_decimal number, s21_decimal *result) {
   if (!s21_truncate(number, s21_set_zeroes(result)) && s21_get_sign(number) &&

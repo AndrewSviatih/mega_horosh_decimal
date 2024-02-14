@@ -14,6 +14,21 @@ START_TEST(from_decimal_to_int_0) {
 END_TEST
 
 START_TEST(from_decimal_to_int_1) {
+  s21_decimal val;
+  val.bits[0] = 0b00000000000000010010000110001001;
+  val.bits[1] = 0b00000000000000000000000000000000;
+  val.bits[2] = 0b00000000000000000000000000000000;
+  val.bits[3] = 0b00000000000000000000000000000000;
+
+  int res = 74121;
+  int tmp = 0;
+  int *dst = &tmp;
+  s21_from_decimal_to_int(val, dst);
+  ck_assert_int_eq(*dst, res);
+}
+END_TEST
+
+START_TEST(from_decimal_test) {
   s21_decimal val = {{123456789, 0, 0, 0}};
   s21_set_bit(&val, 127, 1);
   s21_set_scale(&val, 5);
@@ -489,6 +504,8 @@ Suite *suite_from_decimal_to_int(void) {
   tcase_add_test(tc, s21_from_decimal_to_intTest13);
   tcase_add_test(tc, s21_from_decimal_to_intTest14);
   tcase_add_test(tc, s21_from_decimal_to_intTest15);
+  tcase_add_test(tc, from_decimal_test);
+  
   /*Serzhunya*/
 
   suite_add_tcase(s, tc);

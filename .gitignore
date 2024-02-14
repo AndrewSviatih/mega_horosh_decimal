@@ -15,6 +15,9 @@
 # Precompiled Headers
 *.gch
 *.pch
+CMakeLists.txt
+cmake-build-debug/
+.clang-format
 
 # Libraries
 *.lib
@@ -28,6 +31,7 @@ s21_decimal
 *.so
 *.so.*
 *.dylib
+.vscode/
 
 # Executables
 *.exe

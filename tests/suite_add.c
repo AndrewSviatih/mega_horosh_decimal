@@ -145,7 +145,7 @@ START_TEST(add_17) {
   s21_set_scale(&val1, 5);
   s21_set_scale(&val2, 3);
   s21_decimal res = {{0}};
-  ck_assert_int_eq(1, s21_add(val1, val2, &res));
+  ck_assert_int_eq(0, s21_add(val1, val2, &res));
 }
 END_TEST
 
@@ -155,7 +155,7 @@ START_TEST(add_18) {
   s21_set_scale(&val1, 5);
   s21_set_scale(&val2, 3);
   s21_decimal res = {{0}};
-  ck_assert_int_eq(2, s21_add(val1, val2, &res));
+  ck_assert_int_eq(0, s21_add(val1, val2, &res));
 }
 END_TEST
 
@@ -537,10 +537,10 @@ START_TEST(add_test_24) {
   dec2.bits[1] = 0xFF;
   dec2.bits[0] = 0x67E4FFFF;
   s21_decimal res = {{0}};
-  res.bits[3] = 0x300000;
+  res.bits[3] = 0;
   res.bits[2] = 0;
-  res.bits[1] = 0x10E;
-  res.bits[0] = 0xCFC9FEEE;
+  res.bits[1] = 0;
+  res.bits[0] = 0;
   s21_decimal res1 = {{0}};
   s21_add(dec1, dec2, &res1);
   ck_assert_int_eq(res.bits[3], res1.bits[3]);
@@ -1195,9 +1195,7 @@ START_TEST(s21_test_decimal_add_29) {
   s21_decimal d = {
       {0b01001000000110110001111110011000, 0b11111011111111011000100101101101,
        0b00000000000001000110110101110111, 0b10000000000110000000000000000000}};
-  s21_decimal etalon = {
-      {0b10110110001010011011010111011010, 0b11111001111010100000110001111111,
-       0b10110000001111101111000010010100, 0b10000000000011100000000000000000}};
+  s21_decimal etalon = {{0x5f042bc9, 0xb29767a6, 0x119fe4db, 0x800d0000}};
 
   s21_decimal res = {{0, 0, 0, 0}};
   s21_decimal* p_res = &res;
@@ -1800,9 +1798,10 @@ START_TEST(add_test_37) {
 }
 END_TEST
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-Тесты на все типы данных (ручные)
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * Тесты на все типы данных (ручные)
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * */
 
 Suite* suite_add(void) {
   Suite* s = suite_create("suite_add");

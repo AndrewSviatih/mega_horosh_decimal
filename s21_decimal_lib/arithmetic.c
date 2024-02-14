@@ -160,7 +160,7 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
       }
     }
     if (equalToZero(*result)) {
-      result->bits[3] &= ~MINUS;
+      result->bits[3] = 0x0;
     }
   }
   return error;
@@ -168,12 +168,9 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
 
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal* result) {
   int error = 0;
-  if (equalToZero(value_1) || equalToZero(value_2)) {
-    for (int i = 0; i < 4; i++) result->bits[i] = 0x0;
-  } else {
-    value_2.bits[3] ^= MINUS;
-    error = s21_add(value_1, value_2, result);
-  }
+  value_2.bits[3] ^= MINUS;
+  error = s21_add(value_1, value_2, result);
+  if (equalToZero(*result)) result->bits[3] = 0x0;
   return error;
 }
 

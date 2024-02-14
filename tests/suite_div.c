@@ -56,10 +56,10 @@ END_TEST
 START_TEST(div_6) {
   s21_decimal value_1 = {{0x88888888, 0x88888888, 0x88888888, 0}};
   s21_decimal value_2 = {{0x2, 0, 0, 0}};
-  s21_set_sign(&value_2);
+  s21_swap_sign(&value_2);
   s21_decimal result = {{0, 0, 0, 0}};
   s21_decimal check = {{0x44444444, 0x44444444, 0x44444444, 0}};
-  s21_set_sign(&check);
+  s21_swap_sign(&check);
   int return_value = s21_div(value_1, value_2, &result);
   ck_assert_int_eq(s21_is_equal(result, check), 1);
   ck_assert_int_eq(return_value, 0);
@@ -68,9 +68,9 @@ END_TEST
 
 START_TEST(div_7) {
   s21_decimal value_1 = {{10, 0, 0, 0}};
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{8, 0, 0, 0}};
-  s21_set_sign(&value_2);
+  s21_swap_sign(&value_2);
   s21_decimal result = {{0, 0, 0, 0}};
   s21_decimal check = {{125, 0, 0, 0}};
   s21_set_scale(&check, 2);
@@ -82,7 +82,7 @@ END_TEST
 
 START_TEST(div_8) {
   s21_decimal value_1 = {{15, 0, 0, 0}};
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{0, 0, 0, 0}};
   s21_decimal result = {{0, 0, 0, 0}};
   s21_decimal check = {{0, 0, 0, 0}};
@@ -95,7 +95,7 @@ END_TEST
 START_TEST(div_9) {
   s21_decimal value_1 = {{10, 0, 0, 0}};
   s21_decimal value_2 = {{1, 0, 0, 0}};
-  //s21_set_scale(&value_2, 2);
+  // s21_set_scale(&value_2, 2);
   s21_decimal result = {{0, 0, 0, 0}};
   s21_decimal check = {{10u, 0, 0, 0}};
   int return_value = s21_div(value_1, value_2, &result);

@@ -25,7 +25,6 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
 }
 
 int s21_from_int_to_decimal(int src, s21_decimal *dst) {
-
   s21_zero_decimal(dst);
   int error = 0;
 
@@ -33,7 +32,7 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
     error = 1;
   } else {
     if (src < 0) {
-      s21_set_sign(dst);
+      s21_swap_sign(dst);
       src *= -1;
     }
     if (src > INT_MAX)
@@ -45,12 +44,11 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
 }
 
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
-
   int error = 0;
 
   if (!dst) {
     error = 1;
-  } else {  
+  } else {
     int scale = s21_get_scale(src);
 
     if (src.bits[1] || src.bits[2] || scale < 0 || scale > 28) {
@@ -85,7 +83,6 @@ int s21_from_decimal_to_double(s21_decimal src, long double *dst) {
 }
 
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
-
   s21_zero_decimal(dst);
   int error = 0;
 
@@ -97,7 +94,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
       if (exp < -94 || exp > 96) {
         error = 1;
       } else {
-        double temp = (double) fabs(src);
+        double temp = (double)fabs(src);
         int i = 0;
         temp = s21_normalize_28_signs(temp, &i);
         if (i <= 28) {
@@ -106,7 +103,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
           dst->bits[0] = intPart & 0xFFFFFFFF;
           dst->bits[1] = (intPart >> 32) & 0xFFFFFFFF;
           dst->bits[3] |= i << 16;
-          if (signbit(src)) s21_set_sign(dst);
+          if (signbit(src)) s21_swap_sign(dst);
         }
       }
     }

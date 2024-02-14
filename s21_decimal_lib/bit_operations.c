@@ -11,11 +11,9 @@ int s21_get_scale(s21_decimal dst) {
   return scale;
 }
 
-int s21_get_sign(s21_decimal dst) {
-  return (dst.bits[3] & MINUS) != 0;
-}
+int s21_get_sign(s21_decimal dst) { return (dst.bits[3] & MINUS) != 0; }
 
-void s21_set_sign(s21_decimal *dst) { dst->bits[3] = dst->bits[3] | MINUS; }
+void s21_swap_sign(s21_decimal *dst) { dst->bits[3] = dst->bits[3] | MINUS; }
 
 void s21_set_scale(s21_decimal *dst, int scale) {
   int sign = 0;
@@ -23,7 +21,7 @@ void s21_set_scale(s21_decimal *dst, int scale) {
   dst->bits[3] = 0;
   scale <<= 16;
   dst->bits[3] = scale | dst->bits[3];
-  if (sign) s21_set_sign(dst);
+  if (sign) s21_swap_sign(dst);
 }
 
 void s21_set_bit(s21_decimal *dst, int index, int bit) {
@@ -39,7 +37,7 @@ void s21_zero_decimal(s21_decimal *dst) {
 }
 
 double s21_normalize_28_signs(double temp, int *i) {
-  for (; *i < 28 && (int) temp / (int) pow(2, 21) == 0; *i = *i + 1) {
+  for (; *i < 28 && (int)temp / (int)pow(2, 21) == 0; *i = *i + 1) {
     temp *= 10;
   }
   return temp;

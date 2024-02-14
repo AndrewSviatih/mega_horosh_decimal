@@ -1,23 +1,8 @@
-//
-// Created by Sonse on 18.01.2024.
-//
-
-#include "decimal.h"
-
-#define BIT_ONE 1
-#define BIT_NONE 0
-#define S21_DEC_BIT_LEN 4
-
-#define SIGN_INDEX 127
-
-#define S21_DEC_INDEX(index) (index / 32)
-#define S21_DEC_BIT_FOR_INDEX(index) (index % 32)
-
-#define ANY_ERROR 1
-#define OK 0
+#include "s21_decimal.h"
 
 int s21_floor(s21_decimal number, s21_decimal *result) {
-  if (!s21_truncate(number, s21_set_zeroes(result)) && s21_get_sign(number) &&
+  s21_set_zeroes(result);
+  if (!s21_truncate(number, result) && s21_get_sign(number) &&
       !s21_is_equal(*result, number))
     s21_sub(*result, ((s21_decimal){{BIT_ONE, BIT_NONE, BIT_NONE, BIT_NONE}}),
             result);
@@ -38,7 +23,7 @@ int s21_round(s21_decimal number, s21_decimal *result) {
 int s21_truncate(s21_decimal number, s21_decimal *result) {
   int err = OK;
   if (s21_copy(result, number) == OK) {
-    if (s21_set_zeroes(&result) == OK) {
+    if (s21_set_zeroes(result) == OK) {
       if (s21_get_scale(number)) {
         s21_set_scale(&number, s21_get_scale(number));
       }
@@ -47,7 +32,7 @@ int s21_truncate(s21_decimal number, s21_decimal *result) {
   } else {
     err = ANY_ERROR;
   }
-  return OK;
+  return err;
 }
 
 int s21_negate(s21_decimal value, s21_decimal *result) {
@@ -64,29 +49,9 @@ int s21_negate(s21_decimal value, s21_decimal *result) {
   return error;
 }
 
-int s21_get_bit(s21_decimal number, int index) {
-  int num_index = S21_DEC_INDEX(index);
-  int num_bit = S21_DEC_BIT_FOR_INDEX(index);
-  //   int mask = number.bits[num_index] & (1u << num_bit);
-  //   return mask >> num_bit;
-  return (number.bits[num_index] & (1u << num_bit)) >> num_bit;
-}
-
-void s21_set_bit(s21_decimal *number, int index, int bit) {
-  int num_index = S21_DEC_INDEX(index);
-  int num_bit = S21_DEC_BIT_FOR_INDEX(index);
-  if (bit == BIT_ONE) {
-    number->bits[num_index] |= (1u << num_bit);
-  } else {
-    number->bits[num_index] &= (~((1u) << num_bit));
-  }
-}
-
 void s21_set_sign(s21_decimal *number, int sign) {
   s21_set_bit(number, SIGN_INDEX, sign);
 }
-
-int s21_get_sign(s21_decimal number) { return s21_get_bit(number, SIGN_INDEX); }
 
 int s21_copy(s21_decimal *to, s21_decimal from) {
   int error = OK;
@@ -108,22 +73,6 @@ int s21_set_zeroes(s21_decimal *number) {
     for (int i = 0; i < S21_DEC_BIT_LEN; i++) number->bits[i] = 0;
   }
   return error;
-}
-
-int s21_get_scale(s21_decimal number) {
-  int res = 0;
-  for (int i = 119; i >= 112; i--) {
-    res <<= 1;
-    res |= s21_get_bit(number, i);
-  }
-  return res;
-}
-
-void s21_set_scale(s21_decimal *number, int scale) {
-  for (int i = 112; i < 119; i++) {
-    s21_set_bit(number, i, scale & 1);
-    scale >>= 1;
-  }
 }
 
 s21_decimal *s21_decrease_scale(s21_decimal *number, int by) {

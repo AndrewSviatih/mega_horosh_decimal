@@ -195,10 +195,10 @@ END_TEST
 START_TEST(sub_22) {
   s21_decimal value_1 = {{13, 0, 0, 0}};
   s21_set_scale(&value_1, 1);
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{286, 0, 0, 0}};
   s21_set_scale(&value_2, 2);
-  s21_set_sign(&value_2);
+  s21_swap_sign(&value_2);
   s21_decimal result = {0};
   s21_decimal check = {{156, 0, 0, 0}};
   s21_set_scale(&check, 2);
@@ -211,13 +211,13 @@ END_TEST
 START_TEST(sub_23) {
   s21_decimal value_1 = {{13, 0, 0, 0}};
   s21_set_scale(&value_1, 1);
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{286, 0, 0, 0}};
   s21_set_scale(&value_2, 2);
   s21_decimal result = {0};
   s21_decimal check = {{416, 0, 0, 0}};
   s21_set_scale(&check, 2);
-  s21_set_sign(&check);
+  s21_swap_sign(&check);
   int return_value = s21_sub(value_1, value_2, &result);
   ck_assert_int_eq(s21_is_equal(result, check), 1);
   ck_assert_int_eq(return_value, 0);
@@ -226,7 +226,7 @@ END_TEST
 
 START_TEST(sub_24) {
   s21_decimal value_1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0}};
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{2, 0, 0, 0}};
   s21_decimal result = {0};
   s21_decimal check = {{0, 0, 0, 0}};
@@ -238,9 +238,9 @@ END_TEST
 
 START_TEST(sub_25) {
   s21_decimal value_1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0}};
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{2, 0, 0, 0}};
-  s21_set_sign(&value_2);
+  s21_swap_sign(&value_2);
   s21_decimal result = {0};
   s21_decimal check = {{0, 0, 0, 0}};
   int return_value = s21_add(value_1, value_2, &result);
@@ -257,7 +257,7 @@ START_TEST(sub_26) {
   s21_decimal result = {0};
   s21_decimal check = {{5854929, 0, 0, 0}};
   s21_set_scale(&check, 4);
-  s21_set_sign(&check);
+  s21_swap_sign(&check);
   int return_value = s21_sub(value_1, value_2, &result);
   ck_assert_int_eq(s21_is_equal(result, check), 1);
   ck_assert_int_eq(return_value, 0);

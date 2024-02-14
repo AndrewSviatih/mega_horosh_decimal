@@ -132,7 +132,7 @@ END_TEST
 START_TEST(mul_15) {
   s21_decimal value_1 = {{123456u, 123u, 0, 0}};
   s21_decimal value_2 = {{654321u, 654u, 0, 0}};
-  s21_set_sign(&value_2);
+  s21_swap_sign(&value_2);
   s21_set_scale(&value_1, 2);
   s21_set_scale(&value_2, 3);
   s21_decimal result = {{0, 0, 0, 0}};
@@ -146,7 +146,7 @@ END_TEST
 START_TEST(mul_16) {
   s21_decimal value_1 = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0}};
   s21_decimal value_2 = {{2, 0, 0, 0}};
-  s21_set_sign(&value_2);
+  s21_swap_sign(&value_2);
   s21_decimal result = {{0, 0, 0, 0}};
   s21_decimal check = {{0, 0, 0, 0}};
   int return_value = s21_mul(value_1, value_2, &result);
@@ -157,7 +157,7 @@ END_TEST
 
 START_TEST(mul_17) {
   s21_decimal value_1 = {{17, 0, 0, 0}};
-  s21_set_sign(&value_1);
+  s21_swap_sign(&value_1);
   s21_decimal value_2 = {{0, 0, 0, 0}};
   s21_decimal result = {0};
   s21_decimal check = {{0, 0, 0, 0}};

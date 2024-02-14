@@ -25,8 +25,9 @@ void run_tests() {
                         suite_is_less_or_equal(), suite_is_less(),
                         suite_is_not_equal(), suite_from_decimal_to_int(),
                         suite_from_int_to_decimal(), suite_float_to_decimal(),
-                        suite_add(), suite_sub(), suite_div(), suite_mul(), 
-                        NULL};
+                        suite_add(), suite_sub(), suite_div(), suite_mul(),
+                        suite_negate(), suite_truncate(), suite_round(),
+                         suite_floor(),NULL};
 
   for (Suite **current_testcase = list_cases; *current_testcase != NULL;
        current_testcase++) {

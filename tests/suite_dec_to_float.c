@@ -3,13 +3,13 @@
 #define TEST_CONVERSION_ERROR 1
 
 START_TEST(from_decimal_to_float_0) {
-    s21_decimal val = {{123456789, 0, 0, 0}};
-    s21_set_scale(&val, 5);
-    float res = 1234.56789;
-    float tmp = 0.;
-    float *dst = &tmp;
-    s21_from_decimal_to_float(val, dst);
-    ck_assert_float_eq(*dst, res);
+  s21_decimal val = {{123456789, 0, 0, 0}};
+  s21_set_scale(&val, 5);
+  float res = 1234.56789;
+  float tmp = 0.;
+  float *dst = &tmp;
+  s21_from_decimal_to_float(val, dst);
+  ck_assert_float_eq(*dst, res);
 }
 END_TEST
 
@@ -85,7 +85,7 @@ END_TEST
 
 START_TEST(s21_from_decimal_to_float_4) {
   s21_decimal value = {{1812, 0, 0, 0}};
-  s21_set_sign(&value);
+  s21_swap_sign(&value);
   float result = 0;
   float check = -1812;
   int return_value = s21_from_decimal_to_float(value, &result);
@@ -97,7 +97,7 @@ END_TEST
 START_TEST(s21_from_decimal_to_float_5) {
   s21_decimal value = {{18122, 0, 0, 0}};
   s21_set_scale(&value, 3);
-  s21_set_sign(&value);
+  s21_swap_sign(&value);
   float result = 0;
   float check = -18.122;
   int return_value = s21_from_decimal_to_float(value, &result);
@@ -403,11 +403,9 @@ START_TEST(s21_from_decimal_to_floatTest7) {
 }
 END_TEST
 
-
 Suite *suite_from_decimal_to_float(void) {
   Suite *s = suite_create("from_decimal_to_float");
   TCase *tc = tcase_create("from_decimal_to_float_tc");
-
 
   tcase_add_test(tc, from_decimal_to_float_0);
   tcase_add_test(tc, from_decimal_to_float_1);

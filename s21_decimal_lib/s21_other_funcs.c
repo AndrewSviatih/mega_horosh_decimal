@@ -1,7 +1,8 @@
 #include "s21_decimal.h"
 
 int s21_floor(s21_decimal number, s21_decimal *result) {
-  if (!s21_truncate(number, s21_set_zeroes(result)) && s21_get_sign(number) &&
+  s21_set_zeroes(result);
+  if (!s21_truncate(number, result) && s21_get_sign(number) &&
       !s21_is_equal(*result, number))
     s21_sub(*result, ((s21_decimal){{BIT_ONE, BIT_NONE, BIT_NONE, BIT_NONE}}),
             result);
@@ -22,7 +23,7 @@ int s21_round(s21_decimal number, s21_decimal *result) {
 int s21_truncate(s21_decimal number, s21_decimal *result) {
   int err = OK;
   if (s21_copy(result, number) == OK) {
-    if (s21_set_zeroes(&result) == OK) {
+    if (s21_set_zeroes(result) == OK) {
       if (s21_get_scale(number)) {
         s21_set_scale(&number, s21_get_scale(number));
       }
@@ -31,7 +32,7 @@ int s21_truncate(s21_decimal number, s21_decimal *result) {
   } else {
     err = ANY_ERROR;
   }
-  return OK;
+  return err;
 }
 
 int s21_negate(s21_decimal value, s21_decimal *result) {

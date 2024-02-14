@@ -26,17 +26,6 @@
 #define ANY_ERROR 1
 #define OK 0
 
-// sign operations
-void s21_set_sign(s21_decimal *number, int sign);
-
-int s21_copy(s21_decimal *to, s21_decimal from);
-// set all bits to 0
-int s21_set_zeroes(s21_decimal *number);
-
-// scale operations with decimal
-s21_decimal *s21_decrease_scale(s21_decimal *number, int by);
-// ============================================
-
 typedef struct {
   int bits[4];
 } s21_decimal;
@@ -51,6 +40,17 @@ typedef struct {
   uint64_t bits[7];
   uint16_t scale;
 } work_decimal;
+
+// sign operations
+void s21_set_sign(s21_decimal *number, int sign);
+
+int s21_copy(s21_decimal *to, s21_decimal from);
+// set all bits to 0
+int s21_set_zeroes(s21_decimal *number);
+
+// scale operations with decimal
+s21_decimal *s21_decrease_scale(s21_decimal *number, int by);
+// ============================================
 
 /**
 --------------------------------------------------------------

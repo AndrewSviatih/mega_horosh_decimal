@@ -47,10 +47,14 @@ Suite *suite_is_not_equal(void);
 // TODO: tests arithmetic
 Suite* suite_add(void);
 Suite *add_suite1(void);
-
 Suite* suite_sub(void);
 Suite *suite_div(void);
 Suite *suite_mul(void);
+// TODO: tests other funcs
+Suite *suite_negate(void);
+Suite *suite_truncate(void);
+Suite *suite_round(void);
+Suite *suite_floor(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase, int counter_testcase);

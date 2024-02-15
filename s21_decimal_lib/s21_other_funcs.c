@@ -21,18 +21,19 @@ int s21_round(s21_decimal number, s21_decimal *result) {
 }
 
 int s21_truncate(s21_decimal number, s21_decimal *result) {
-  int err = OK;
-  if (s21_copy(result, number) == OK) {
-    if (s21_set_zeroes(result) == OK) {
-      if (s21_get_scale(number)) {
-        s21_set_scale(&number, s21_get_scale(number));
-      }
-      s21_copy(result, number);
-    }
+  int error = OK;
+  if (result == NULL || s21_get_scale(number) < 0) {
+    error = ANY_ERROR;
   } else {
-    err = ANY_ERROR;
+    int sign = s21_get_sign(number);
+    work_decimal work_resul = conversion(number);
+    while (work_resul.scale > 0) {
+      pointright(&work_resul);
+    }
+    *result = reverseConversion(work_resul);
+    s21_set_sign(result, sign);
   }
-  return err;
+  return error;
 }
 
 int s21_negate(s21_decimal value, s21_decimal *result) {

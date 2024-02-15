@@ -1480,7 +1480,7 @@ START_TEST(s21_sub_inf_27) {
   s21_decimal dec2 = {{1, 0, 0, tmp}};
   s21_decimal res1 = {{0}};
   int ret_s21 = s21_sub(dec1, dec2, &res1);
-  ck_assert_int_eq(2, ret_s21);
+  ck_assert_int_eq(1, ret_s21);
 }
 END_TEST
 

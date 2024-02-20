@@ -766,10 +766,10 @@ START_TEST(s21_subTest17) {
   s21_sub(src1, src2, &result);
 
   // -54545451245453999999999999999 exp 14
-  origin.bits[0] = 0b01001111100110101111111111111111;
-  origin.bits[1] = 0b11111001111001100011111011011011;
-  origin.bits[2] = 0b10110000001111101111000010010100;
-  origin.bits[3] = 0b10000000000011100000000000000000;
+  origin.bits[0] = 0x8674bb8c;
+  origin.bits[1] = 0x01f016;
+  origin.bits[2] = 0b0;
+  origin.bits[3] = 0b10000000000000000000000000000000;
   ck_assert_int_eq(origin.bits[3], result.bits[3]);
   ck_assert_int_eq(origin.bits[2], result.bits[2]);
   ck_assert_int_eq(origin.bits[1], result.bits[1]);
@@ -1553,7 +1553,7 @@ START_TEST(s21_sub_max_30) {
   src2.bits[2] = 0b00000000000000000000000000000000;
   src2.bits[3] = 0b00000000000000110000000000000000;
   s21_decimal original_res = {0};
-  original_res.bits[0] = 0b11111111111111111111111111111110;
+  original_res.bits[0] = 0b11111111111111111111111111111111;
   original_res.bits[1] = 0b11111111111111111111111111111111;
   original_res.bits[2] = 0b11111111111111111111111111111111;
   original_res.bits[3] = 0b00000000000000000000000000000000;

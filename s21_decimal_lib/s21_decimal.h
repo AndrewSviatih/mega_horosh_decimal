@@ -125,6 +125,8 @@ void pointleft(work_decimal *num);
 uint64_t pointright(work_decimal *num);
 // is number can be round
 bool isRoundPosebal(work_decimal num);
+// Банковское округление
+int bank_okruglenie(work_decimal num, work_decimal num_2);
 // normalize decimal
 bool normalization(work_decimal *num);
 // Неполное вычитание ??????

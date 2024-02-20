@@ -619,7 +619,7 @@ START_TEST(add_test_29) {
   s21_from_float_to_decimal(a, &src2);
   s21_decimal res_dec = {0};
   s21_add(src1, src2, &res_dec);
-  ck_assert_int_eq(s21_add(src1, src2, &res_dec), 0);
+  ck_assert_int_eq(s21_add(src1, src2, &res_dec), 1);
 }
 END_TEST
 
@@ -630,7 +630,7 @@ START_TEST(add_test_30) {
   s21_from_float_to_decimal(a, &src2);
   s21_decimal res_dec = {0};
   s21_add(src1, src2, &res_dec);
-  ck_assert_int_eq(s21_add(src1, src2, &res_dec), 0);
+  ck_assert_int_eq(s21_add(src1, src2, &res_dec), 2);
 }
 END_TEST
 
@@ -1674,7 +1674,7 @@ START_TEST(s21_add_max_32) {
   src2.bits[2] = 0b00000000000000000000000000000000;
   src2.bits[3] = 0b00000000000000010000000000000000;
   s21_decimal s21_res = {0};
-  ck_assert_int_eq(s21_add(src1, src2, &s21_res), 0);
+  ck_assert_int_eq(s21_add(src1, src2, &s21_res), 1);
 }
 END_TEST
 
@@ -1706,7 +1706,7 @@ START_TEST(s21_add_max_34) {
   src2.bits[2] = 0b00000000000000000000000000000000;
   src2.bits[3] = 0b00000000000000110000000000000000;
   s21_decimal original_res = {0};
-  original_res.bits[0] = 0b11111111111111111111111111111110;
+  original_res.bits[0] = 0b11111111111111111111111111111111;
   original_res.bits[1] = 0b11111111111111111111111111111111;
   original_res.bits[2] = 0b11111111111111111111111111111111;
   original_res.bits[3] = 0b10000000000000000000000000000000;

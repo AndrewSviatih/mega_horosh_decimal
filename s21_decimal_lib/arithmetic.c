@@ -67,16 +67,49 @@ bool isRoundPosebal(work_decimal num) {
   return (remainder_i == 0);
 }
 
+int bank_okruglenie(work_decimal num, work_decimal num_2) {
+  bool chet = !(pointright(&num_2) % 2);
+  int res = 0;
+  work_decimal bank;
+  setToZero(&bank);
+  while (!equalToZeroWork(num)) {
+    pointleft(&bank);
+    bank.bits[0] += pointright(&num);
+    getoverflow(&bank);
+  }
+  int gg = pointright(&bank);
+  if (gg > 5) {
+    res = 1;
+  } else if (gg == 5) {
+    if (!equalToZeroWork(bank)) {
+      res = 1;
+    } else {
+      if (!chet) {
+        res = 1;
+      }
+    }
+  }
+  return res;
+}
+
 bool normalization(work_decimal* num) {
   bool res = false;
+  work_decimal bank;
+  setToZero(&bank);
   for (int i = 6; i > 2 && !res; i--) {
     while (num->bits[i] != 0 && !res) {
       if (num->scale > 0) {
-        pointright(num);
+        pointleft(&bank);
+        bank.bits[0] += pointright(num);
+        getoverflow(&bank);
       } else {
         res = true;
       }
     }
+  }
+  if (bank_okruglenie(bank, *num)) {
+    num->bits[0] += 1;
+    if (!res) res = getoverflow3(num);
   }
   while (isRoundPosebal(*num) && num->scale > 0) {
     pointright(num);

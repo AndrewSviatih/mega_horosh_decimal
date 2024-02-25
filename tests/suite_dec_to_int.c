@@ -197,15 +197,6 @@ START_TEST(s21_test_from_decimal_to_int_4) {
 }
 END_TEST
 
-// START_TEST(s21_test_from_decimal_to_int_6) {
-//   s21_decimal a = {{UINT_MAX, 0, 0, 0}};
-//   check = -1;
-//   code = s21_from_decimal_to_int(a, &result);
-//   ck_assert_int_eq(result, check);
-//   ck_assert_int_eq(code, 1);
-// }
-// END_TEST
-
 START_TEST(s21_test_from_decimal_to_int_7) {
   int result = 0;
   s21_decimal a = {{UINT_MAX, UINT_MAX, UINT_MAX, 0}};
@@ -471,7 +462,6 @@ Suite *suite_from_decimal_to_int(void) {
   tcase_add_loop_test(tc, from_decimal_to_int_3, 0, 1000);
   tcase_add_test(tc, from_decimal_to_int_4);
 
-  /*Serzhunya*/
   tcase_add_test(tc, s21_from_decimal_to_int_1);
   tcase_add_test(tc, s21_from_decimal_to_int_2);
    tcase_add_test(tc, s21_from_decimal_to_int_3);
@@ -484,7 +474,6 @@ Suite *suite_from_decimal_to_int(void) {
    tcase_add_test(tc, s21_test_from_decimal_to_int_2);
   tcase_add_test(tc, s21_test_from_decimal_to_int_3);
   tcase_add_test(tc, s21_test_from_decimal_to_int_4);
-//   tcase_add_test(tc, s21_test_from_decimal_to_int_6);
   tcase_add_test(tc, s21_test_from_decimal_to_int_7);
   tcase_add_test(tc, s21_test_from_decimal_to_int_8);
   tcase_add_test(tc, s21_test_from_decimal_to_int_9);
@@ -505,8 +494,6 @@ Suite *suite_from_decimal_to_int(void) {
   tcase_add_test(tc, s21_from_decimal_to_intTest14);
   tcase_add_test(tc, s21_from_decimal_to_intTest15);
   tcase_add_test(tc, from_decimal_test);
-  
-  /*Serzhunya*/
 
   suite_add_tcase(s, tc);
   return s;
